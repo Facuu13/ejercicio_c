@@ -94,39 +94,71 @@ string encontrarDniPedidoMasPesado(const vector<Pedido>& pedidos) {
 }
 
 
+// Función para encontrar el DNI del responsable que facturó un pedido dado su código
+string encontrarDniPorCodigo(const vector<Pedido>& pedidos, int codigoPedido) {
+    for (const auto& pedido : pedidos) {
+        if (pedido.codigo == codigoPedido) {
+            return pedido.dni;
+        }
+    }
+    return ""; // Si no se encuentra el código, devolvemos una cadena vacía
+}
+
 int main() {
     // Vector de pedidos (simulando la entrada de datos)
     vector<Pedido> pedidos = {
         {1, 500.0, "buenos aires", 1000.0, "Juan Perez", "12345678"},
         {2, 75.0, "jujuy", 800.0, "Maria Lopez", "23456789"},
-        {3, 700.0, "cordoba", 1500.0, "Carlos Garcia", "34567890"},
+        {12655, 700.0, "cordoba", 1500.0, "Carlos Garcia", "34567890"},
         {4, 90.0, "buenos aires", 1200.0, "Ana Torres", "45678901"},
         {5, 60.0, "salta", 2000.0, "Luis Martinez", "56789012"},
         {6, 200.0, "santiago del estero", 700.0, "Jose Fernandez", "67890123"},
-        {7, 80.0, "buenos aires", 900.0, "Carlos Chavez", "78901234"}
+        {7, 800.0, "buenos aires", 900.0, "Carlos Chavez", "78901234"}
     };
 
     //Ejercicio 1
+    cout << "EJERCICIO 1 " << endl;
     // Determinar la provincia con más pedidos
     string provincia = provinciaConMasPedidos(pedidos);
     cout << "La provincia con más pedidos es: " << provincia << endl;
+    cout << "------------------- " << endl;
 
     //Ejercicio 2
+    cout << "EJERCICIO 2 " << endl;
     // Nombre del responsable a buscar
     string nombre = "Carlos";
     // Imprimir los pedidos facturados a nombre del responsable especificado
     cout << "Pedidos facturados a nombre de " << nombre << ":" << endl;
     imprimirPedidosPorNombre(pedidos, nombre);
+    cout << "------------------- " << endl;
 
     //Ejercicio 3
+    cout << "EJERCICIO 3 " << endl;
     // Calcular el porcentaje de pedidos cuyo peso está entre 50 y 100 kilos
     double porcentaje = calcularPorcentajePedidos(pedidos, 50.0, 100.0);
     cout << "Porcentaje de pedidos cuyo peso está entre 50 y 100 kilos: " << porcentaje << "%" << endl;
+    cout << "------------------- " << endl;
 
     //Ejercicio 4  
+    cout << "EJERCICIO 4 " << endl;
     // Encontrar el DNI del responsable que facturó el pedido más pesado
     string dniMasPesado = encontrarDniPedidoMasPesado(pedidos);
     cout << "El DNI del responsable que facturó el pedido más pesado es: " << dniMasPesado << endl;
+    cout << "------------------- " << endl;
+
+    //Ejercicio 5
+    cout << "EJERCICIO 5 " << endl;
+    //ingresamos el codigo 
+    int codigoBuscado = 12655;
+    // Encontrar el DNI del responsable que facturó el pedido buscado
+    string dniResponsable = encontrarDniPorCodigo(pedidos, codigoBuscado);
+    // Imprimir el resultado
+    if (!dniResponsable.empty()) {
+        cout << "El DNI del responsable que facturó el pedido con código " << codigoBuscado << " es: " << dniResponsable << endl;
+    } else {
+        cout << "No se encontró ningún pedido con código " << codigoBuscado << endl;
+    }
+    cout << "------------------- " << endl;
 
     return 0;
 }
