@@ -193,6 +193,26 @@ double calcularTotalFacturadoPorNoResponsable(const vector<Pedido>& pedidos, con
     return totalFacturado;
 }
 
+
+// Función void para encontrar e imprimir el DNI del responsable del pedido más costoso en una provincia específica
+void encontrarEImprimirDNIPedidoMasCostosoEnProvincia(const vector<Pedido>& pedidos, const string& provinciaBuscada) {
+    double maxCosto = 0;
+    string dniResponsableMasCostoso;
+
+    for (const auto& pedido : pedidos) {
+        if (pedido.provincia == provinciaBuscada && pedido.costo > maxCosto) {
+            maxCosto = pedido.costo;
+            dniResponsableMasCostoso = pedido.dni;
+        }
+    }
+
+    if (!dniResponsableMasCostoso.empty()) {
+        cout << "DNI del responsable del pedido más costoso en " << provinciaBuscada << ": " << dniResponsableMasCostoso << endl;
+    } else {
+        cout << "No se encontraron pedidos en la provincia de " << provinciaBuscada << endl;
+    }
+}
+
 int main() {
     // Vector de pedidos (simulando la entrada de datos)
     vector<Pedido> pedidos = {
@@ -204,6 +224,8 @@ int main() {
         {6, 200.0, "santiago del estero", 700.0, "Jose Fernandez", "67890123"},
         {7, 800.0, "buenos aires", 900.0, "Carlos Chavez", "78901234"},
         {8, 90.0, "catamarca", 1200.0, "Ana Torres", "45678901"},
+        {9, 75.0, "ushuaia", 800.0, "Raul Sanchez", "23456789"},
+        {10, 90.0, "ushuaia", 1200.0, "Ana Torres", "45678901"},
     };
 
     //Ejercicio 1
@@ -319,6 +341,13 @@ int main() {
     cout << "Total facturado por pedidos cuyo responsable no es " << nombreResponsable2 << ": $" << totalFacturado << endl;
     cout << "------------------- " << endl;
 
+    //Ejercicio 14 
+    cout << "EJERCICIO 14 " << endl;
+    // Provincia buscada
+    string provinciaBuscada3 = "ushuaia";
+    // Llamar a la función para encontrar e imprimir el DNI del responsable del pedido más costoso en la provincia de Ushuaia
+    encontrarEImprimirDNIPedidoMasCostosoEnProvincia(pedidos, provinciaBuscada3);
+    cout << "------------------- " << endl;
 
     return 0;
 }
