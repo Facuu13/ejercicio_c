@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <limits>
+
 
 using namespace std;
 
@@ -150,6 +150,24 @@ void imprimirCantidadPedidosMenoresAlLimite(const vector<Pedido>& pedidos, doubl
     cout << "Cantidad de pedidos con peso menor a " << limitePeso << " kilos: " << cantidadPedidos << endl;
 }
 
+
+// Función para encontrar el código del pedido más liviano que llegó a una provincia específica
+int encontrarPedidoMasLivianoEnProvincia(const vector<Pedido>& pedidos, const string& provinciaBuscada) {
+    //Indicamos que todavia no se ha encontrado ningun pedido
+    int codigoMasLiviano = -1;
+    double pesoMasLiviano = 10000000000.0; //para asegurar que cualquier peso sea menor al inicializado.
+
+    for (const auto& pedido : pedidos) {
+        if (pedido.provincia == provinciaBuscada && pedido.peso < pesoMasLiviano) {
+            pesoMasLiviano = pedido.peso;
+            codigoMasLiviano = pedido.codigo;
+        }
+    }
+
+    return codigoMasLiviano;
+}
+
+
 int main() {
     // Vector de pedidos (simulando la entrada de datos)
     vector<Pedido> pedidos = {
@@ -159,7 +177,8 @@ int main() {
         {4, 90.0, "buenos aires", 1200.0, "Ana Torres", "45678901"},
         {5, 60.0, "salta", 2000.0, "Luis Martinez", "56789012"},
         {6, 200.0, "santiago del estero", 700.0, "Jose Fernandez", "67890123"},
-        {7, 800.0, "buenos aires", 900.0, "Carlos Chavez", "78901234"}
+        {7, 800.0, "buenos aires", 900.0, "Carlos Chavez", "78901234"},
+        {8, 90.0, "catamarca", 1200.0, "Ana Torres", "45678901"},
     };
 
     //Ejercicio 1
@@ -238,6 +257,26 @@ int main() {
     double limitePeso = 50.0;
     // Llamamos a la función para imprimir la cantidad de pedidos con peso menor al límite especificado
     imprimirCantidadPedidosMenoresAlLimite(pedidos, limitePeso);
+    cout << "------------------- " << endl;
+
+    //Ejercicio 10
+    cout << "EJERCICIO 10 " << endl;
+    // Provincia buscada
+    string provinciaBuscada2 = "catamarca";
+    // Encontrar el código del pedido más liviano que llegó a la provincia buscada
+    int codigoMasLiviano = encontrarPedidoMasLivianoEnProvincia(pedidos, provinciaBuscada2);
+    if (codigoMasLiviano != -1) {
+        cout << "Código del pedido más liviano que llegó a la provincia de " << provinciaBuscada2 << ": " << codigoMasLiviano << endl;
+    } else {
+        cout << "No se encontraron pedidos en la provincia de " << provinciaBuscada2 << endl;
+    }
+    cout << "------------------- " << endl;
+
+    //Ejercicio 11 , en este ejercicio usamos la misma funcion del ejercicio 3
+    cout << "EJERCICIO 11 " << endl;
+    // Calcular el porcentaje de pedidos cuyo peso está entre 200 y 500 kilos
+    double porcentaje_3 = calcularPorcentajePedidos(pedidos,200.0, 500.0);
+    cout << "Porcentaje de pedidos cuyo peso está entre 200 y 500 kilos: " << porcentaje_3 << "%" << endl;
     cout << "------------------- " << endl;
 
     return 0;
