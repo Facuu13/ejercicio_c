@@ -42,6 +42,19 @@ string provinciaConMasPedidos(const vector<Pedido>& pedidos) {
     return provincias[provinciaIndex];
 }
 
+
+// Función para imprimir los pedidos facturados a un nombre específico
+void imprimirPedidosPorNombre(const vector<Pedido>& pedidos, const string& nombre) {
+    for (const auto& pedido : pedidos) {
+        // Verifica si el nombre del responsable contiene la subcadena especificada
+        if (pedido.responsable.find(nombre) != string::npos) {
+            cout << "Codigo: " << pedido.codigo << ", Peso: " << pedido.peso 
+                 << ", Provincia: " << pedido.provincia << ", Costo: " << pedido.costo 
+                 << ", Responsable: " << pedido.responsable << ", DNI: " << pedido.dni << endl;
+        }
+    }
+}
+
 int main() {
     // Vector de pedidos (simulando la entrada de datos)
     vector<Pedido> pedidos = {
@@ -57,6 +70,12 @@ int main() {
     // Determinar la provincia con más pedidos
     string provincia = provinciaConMasPedidos(pedidos);
     cout << "La provincia con más pedidos es: " << provincia << endl;
+
+    // Nombre del responsable a buscar
+    string nombre = "Carlos";
+    // Imprimir los pedidos facturados a nombre del responsable especificado
+    cout << "Pedidos facturados a nombre de " << nombre << ":" << endl;
+    imprimirPedidosPorNombre(pedidos, nombre);
 
     return 0;
 }
