@@ -179,6 +179,20 @@ void calcularEImprimirTotalFacturado(const vector<Pedido>& pedidos) {
     cout << "Total facturado por todas las provincias: $" << totalGeneral << endl;
 }
 
+
+// Función para calcular el total facturado por pedidos cuyo responsable no sea el nombre especificado
+double calcularTotalFacturadoPorNoResponsable(const vector<Pedido>& pedidos, const string& nombreResponsable) {
+    double totalFacturado = 0.0;
+
+    for (const auto& pedido : pedidos) {
+        if (pedido.responsable != nombreResponsable) {
+            totalFacturado += pedido.costo;
+        }
+    }
+
+    return totalFacturado;
+}
+
 int main() {
     // Vector de pedidos (simulando la entrada de datos)
     vector<Pedido> pedidos = {
@@ -290,11 +304,21 @@ int main() {
     cout << "Porcentaje de pedidos cuyo peso está entre 200 y 500 kilos: " << porcentaje_3 << "%" << endl;
     cout << "------------------- " << endl;
 
-    //Ejercicio 12 , en este ejercicio usamos la misma funcion del ejercicio 3
+    //Ejercicio 12 
     cout << "EJERCICIO 12 " << endl;
     // Llamamos a la función para calcular e imprimir el total facturado por todas las provincias
     calcularEImprimirTotalFacturado(pedidos);
     cout << "------------------- " << endl;
-    
+
+    //Ejercicio 13 
+    cout << "EJERCICIO 13 " << endl;
+    string nombreResponsable2 = "Juan Perez";
+    // Calcular el total facturado por pedidos cuyo responsable no sea el nombre especificado
+    double totalFacturado = calcularTotalFacturadoPorNoResponsable(pedidos, nombreResponsable2);
+    // Imprimir el resultado
+    cout << "Total facturado por pedidos cuyo responsable no es " << nombreResponsable2 << ": $" << totalFacturado << endl;
+    cout << "------------------- " << endl;
+
+
     return 0;
 }
