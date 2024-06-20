@@ -104,6 +104,20 @@ string encontrarDniPorCodigo(const vector<Pedido>& pedidos, int codigoPedido) {
     return ""; // Si no se encuentra el código, devolvemos una cadena vacía
 }
 
+
+// Función para calcular el costo total de los pedidos que llegaron a una provincia específica
+double calcularCostoTotalPorProvincia(const vector<Pedido>& pedidos, const string& provinciaBuscada) {
+    double costoTotal = 0.0;
+
+    for (const auto& pedido : pedidos) {
+        if (pedido.provincia == provinciaBuscada) {
+            costoTotal += pedido.costo;
+        }
+    }
+
+    return costoTotal;
+}
+
 int main() {
     // Vector de pedidos (simulando la entrada de datos)
     vector<Pedido> pedidos = {
@@ -159,6 +173,14 @@ int main() {
         cout << "No se encontró ningún pedido con código " << codigoBuscado << endl;
     }
     cout << "------------------- " << endl;
+
+    //Ejercicio 6
+    cout << "EJERCICIO 6 " << endl;
+    // Calcular el costo total de los pedidos que llegaron a la provincia de Córdoba
+    string provinciaBuscada = "cordoba";
+    double costoTotal = calcularCostoTotalPorProvincia(pedidos, provinciaBuscada);
+    // Imprimir el resultado
+    cout << "Costo total de los pedidos que llegaron a la provincia de " << provinciaBuscada << ": $" << costoTotal << endl;
 
     return 0;
 }
