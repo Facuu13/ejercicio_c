@@ -136,6 +136,20 @@ double calcularPorcentajePedidosPorResponsable(const vector<Pedido>& pedidos, co
 
     return (static_cast<double>(pedidosPorResponsable) / totalPedidos) * 100.0;
 }
+
+// Función void para imprimir la cantidad de pedidos con peso menor al límite especificado
+void imprimirCantidadPedidosMenoresAlLimite(const vector<Pedido>& pedidos, double limitePeso) {
+    int cantidadPedidos = 0;
+
+    for (const auto& pedido : pedidos) {
+        if (pedido.peso < limitePeso) {
+            cantidadPedidos++;
+        }
+    }
+
+    cout << "Cantidad de pedidos con peso menor a " << limitePeso << " kilos: " << cantidadPedidos << endl;
+}
+
 int main() {
     // Vector de pedidos (simulando la entrada de datos)
     vector<Pedido> pedidos = {
@@ -216,6 +230,14 @@ int main() {
     // Calcular el porcentaje de pedidos cuyo peso está entre 90 y 120 kilos
     double porcentaje_2 = calcularPorcentajePedidos(pedidos,90.0, 120.0);
     cout << "Porcentaje de pedidos cuyo peso está entre 90 y 120 kilos: " << porcentaje_2 << "%" << endl;
+    cout << "------------------- " << endl;
+
+    //Ejercicio 9
+    cout << "EJERCICIO 9 " << endl;
+    // Ingresamos el límite de peso para comparar
+    double limitePeso = 50.0;
+    // Llamamos a la función para imprimir la cantidad de pedidos con peso menor al límite especificado
+    imprimirCantidadPedidosMenoresAlLimite(pedidos, limitePeso);
     cout << "------------------- " << endl;
 
     return 0;
