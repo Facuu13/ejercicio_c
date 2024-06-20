@@ -118,6 +118,24 @@ double calcularCostoTotalPorProvincia(const vector<Pedido>& pedidos, const strin
     return costoTotal;
 }
 
+
+// Función para calcular el porcentaje de pedidos facturados por un responsable específico
+double calcularPorcentajePedidosPorResponsable(const vector<Pedido>& pedidos, const string& nombreResponsable) {
+    int totalPedidos = pedidos.size();
+    int pedidosPorResponsable = 0;
+
+    for (const auto& pedido : pedidos) {
+        if (pedido.responsable == nombreResponsable) {
+            pedidosPorResponsable++;
+        }
+    }
+
+    if (totalPedidos == 0) {
+        return 0.0; // Evitar división por cero
+    }
+
+    return (static_cast<double>(pedidosPorResponsable) / totalPedidos) * 100.0;
+}
 int main() {
     // Vector de pedidos (simulando la entrada de datos)
     vector<Pedido> pedidos = {
@@ -181,6 +199,17 @@ int main() {
     double costoTotal = calcularCostoTotalPorProvincia(pedidos, provinciaBuscada);
     // Imprimir el resultado
     cout << "Costo total de los pedidos que llegaron a la provincia de " << provinciaBuscada << ": $" << costoTotal << endl;
+    cout << "------------------- " << endl;
+
+    //Ejercicio 7
+    cout << "EJERCICIO 7 " << endl;
+    // Nombre del responsable buscado
+    string nombreResponsable = "Raul Sanchez";
+    // Calcular el porcentaje de pedidos facturados por el responsable buscado
+    double porcentaje_pedido = calcularPorcentajePedidosPorResponsable(pedidos, nombreResponsable);
+    // Imprimir el resultado
+    cout << "Porcentaje de pedidos facturados por " << nombreResponsable << ": " << porcentaje_pedido << "%" << endl;
+
 
     return 0;
 }
