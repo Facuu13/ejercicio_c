@@ -168,6 +168,17 @@ int encontrarPedidoMasLivianoEnProvincia(const vector<Pedido>& pedidos, const st
 }
 
 
+// Función void para calcular e imprimir el total facturado por todas las provincias
+void calcularEImprimirTotalFacturado(const vector<Pedido>& pedidos) {
+    double totalGeneral = 0.0;
+
+    for (const auto& pedido : pedidos) {
+        totalGeneral += pedido.costo;
+    }
+
+    cout << "Total facturado por todas las provincias: $" << totalGeneral << endl;
+}
+
 int main() {
     // Vector de pedidos (simulando la entrada de datos)
     vector<Pedido> pedidos = {
@@ -279,5 +290,11 @@ int main() {
     cout << "Porcentaje de pedidos cuyo peso está entre 200 y 500 kilos: " << porcentaje_3 << "%" << endl;
     cout << "------------------- " << endl;
 
+    //Ejercicio 12 , en este ejercicio usamos la misma funcion del ejercicio 3
+    cout << "EJERCICIO 12 " << endl;
+    // Llamamos a la función para calcular e imprimir el total facturado por todas las provincias
+    calcularEImprimirTotalFacturado(pedidos);
+    cout << "------------------- " << endl;
+    
     return 0;
 }
