@@ -209,7 +209,14 @@ int main() {
     double porcentaje_pedido = calcularPorcentajePedidosPorResponsable(pedidos, nombreResponsable);
     // Imprimir el resultado
     cout << "Porcentaje de pedidos facturados por " << nombreResponsable << ": " << porcentaje_pedido << "%" << endl;
+    cout << "------------------- " << endl;
 
+    //Ejercicio 8 , en este ejercicio usamos la misma funcion del ejercicio 3
+    cout << "EJERCICIO 8 " << endl;
+    // Calcular el porcentaje de pedidos cuyo peso está entre 90 y 120 kilos
+    double porcentaje_2 = calcularPorcentajePedidos(pedidos,90.0, 120.0);
+    cout << "Porcentaje de pedidos cuyo peso está entre 90 y 120 kilos: " << porcentaje_2 << "%" << endl;
+    cout << "------------------- " << endl;
 
     return 0;
 }
