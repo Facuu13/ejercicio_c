@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <limits>
 
 using namespace std;
 
@@ -76,6 +77,23 @@ double calcularPorcentajePedidos(const vector<Pedido>& pedidos, double pesoMin, 
     return (static_cast<double>(pedidosEnRango) / totalPedidos) * 100.0; 
 }
 
+
+// Función para encontrar el DNI del responsable que facturó el pedido más pesado
+string encontrarDniPedidoMasPesado(const vector<Pedido>& pedidos) {
+    double maxPeso = 0; // Inicializamos con el menor valor posible
+    string dniResponsable;
+
+    for (const auto& pedido : pedidos) {
+        if (pedido.peso > maxPeso) {
+            maxPeso = pedido.peso;
+            dniResponsable = pedido.dni;
+        }
+    }
+
+    return dniResponsable;
+}
+
+
 int main() {
     // Vector de pedidos (simulando la entrada de datos)
     vector<Pedido> pedidos = {
@@ -88,19 +106,27 @@ int main() {
         {7, 80.0, "buenos aires", 900.0, "Carlos Chavez", "78901234"}
     };
 
+    //Ejercicio 1
     // Determinar la provincia con más pedidos
     string provincia = provinciaConMasPedidos(pedidos);
     cout << "La provincia con más pedidos es: " << provincia << endl;
 
+    //Ejercicio 2
     // Nombre del responsable a buscar
     string nombre = "Carlos";
     // Imprimir los pedidos facturados a nombre del responsable especificado
     cout << "Pedidos facturados a nombre de " << nombre << ":" << endl;
     imprimirPedidosPorNombre(pedidos, nombre);
 
+    //Ejercicio 3
     // Calcular el porcentaje de pedidos cuyo peso está entre 50 y 100 kilos
     double porcentaje = calcularPorcentajePedidos(pedidos, 50.0, 100.0);
     cout << "Porcentaje de pedidos cuyo peso está entre 50 y 100 kilos: " << porcentaje << "%" << endl;
+
+    //Ejercicio 4  
+    // Encontrar el DNI del responsable que facturó el pedido más pesado
+    string dniMasPesado = encontrarDniPedidoMasPesado(pedidos);
+    cout << "El DNI del responsable que facturó el pedido más pesado es: " << dniMasPesado << endl;
 
     return 0;
 }
