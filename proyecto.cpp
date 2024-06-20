@@ -55,16 +55,37 @@ void imprimirPedidosPorNombre(const vector<Pedido>& pedidos, const string& nombr
     }
 }
 
+
+// Función para calcular el porcentaje de pedidos cuyo peso está entre 50 y 100 kilos
+double calcularPorcentajePedidos(const vector<Pedido>& pedidos, double pesoMin, double pesoMax) {
+    int totalPedidos = pedidos.size();
+    int pedidosEnRango = 0;
+
+    for (const auto& pedido : pedidos) {
+        if (pedido.peso >= pesoMin && pedido.peso <= pesoMax) {
+            pedidosEnRango++;
+        }
+    }
+
+    if (totalPedidos == 0) {
+        return 0.0; // Evitar división por cero
+    }
+    //static_cast<double>(pedidosEnRango): Convierte pedidosEnRango de int a double. 
+    //y asi podemos obtener el resultado sea de tipo double
+    //multiplicamos por 100 para obtener el porcentaje
+    return (static_cast<double>(pedidosEnRango) / totalPedidos) * 100.0; 
+}
+
 int main() {
     // Vector de pedidos (simulando la entrada de datos)
     vector<Pedido> pedidos = {
         {1, 500.0, "buenos aires", 1000.0, "Juan Perez", "12345678"},
-        {2, 300.0, "jujuy", 800.0, "Maria Lopez", "23456789"},
+        {2, 75.0, "jujuy", 800.0, "Maria Lopez", "23456789"},
         {3, 700.0, "cordoba", 1500.0, "Carlos Garcia", "34567890"},
-        {4, 400.0, "buenos aires", 1200.0, "Ana Torres", "45678901"},
-        {5, 600.0, "salta", 2000.0, "Luis Martinez", "56789012"},
+        {4, 90.0, "buenos aires", 1200.0, "Ana Torres", "45678901"},
+        {5, 60.0, "salta", 2000.0, "Luis Martinez", "56789012"},
         {6, 200.0, "santiago del estero", 700.0, "Jose Fernandez", "67890123"},
-        {7, 300.0, "buenos aires", 900.0, "Miguel Chavez", "78901234"}
+        {7, 80.0, "buenos aires", 900.0, "Carlos Chavez", "78901234"}
     };
 
     // Determinar la provincia con más pedidos
@@ -76,6 +97,10 @@ int main() {
     // Imprimir los pedidos facturados a nombre del responsable especificado
     cout << "Pedidos facturados a nombre de " << nombre << ":" << endl;
     imprimirPedidosPorNombre(pedidos, nombre);
+
+    // Calcular el porcentaje de pedidos cuyo peso está entre 50 y 100 kilos
+    double porcentaje = calcularPorcentajePedidos(pedidos, 50.0, 100.0);
+    cout << "Porcentaje de pedidos cuyo peso está entre 50 y 100 kilos: " << porcentaje << "%" << endl;
 
     return 0;
 }
